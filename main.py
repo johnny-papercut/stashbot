@@ -16,7 +16,7 @@ def update_all_users() -> tuple:
     users = helpers.get_setting('users')
 
     if not users or ',' not in users:
-        return (False, 'No users found in settings')
+        return [('FAILURE', 'No users found in settings')]
     
     users = users.split(',')
 
@@ -148,8 +148,8 @@ def add_user(user):
 
 @app.route('/')
 def index():
-    added = update_all_users()
-    return added
+    messages = update_all_users()
+    return '\n'.join(f"{m[0]}: {m[1]}" for m in messages)
 
 
 if __name__ == '__main__':

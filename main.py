@@ -122,7 +122,7 @@ def update_user(user: str, mute: bool = False) -> list:
             for webhook in webhooks:
                 helpers.send_to_webhook(messages, webhook)
 
-    return added
+    return f"Added: {','.join(added)}"
 
 
 @app.route('/add/<user>')

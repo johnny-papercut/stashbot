@@ -130,10 +130,14 @@ def add_user(user):
 
     users = helpers.get_setting('users')
 
-    if not users or ',' not in users:
+    print(users)
+
+    if not users:
         userlist = []
     else:
         userlist = users.split(',')
+
+    print(userlist)
 
     if user in userlist:
         return f"{user} already added"
@@ -141,7 +145,7 @@ def add_user(user):
     userlist.append(user)
 
     helpers.update_setting('users', ','.join(userlist))
-    update_user(user, mute=True)
+    # update_user(user, mute=True)
 
     return f"Added {user}"
 

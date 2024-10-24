@@ -44,7 +44,10 @@ def get_setting(key: str) -> str:
 
 
 def update_setting(key: str, value: str):
-    bq_query(f"UPDATE `{SETTINGS_TABLE}` SET value = '{value}' WHERE key = '{key}'")
+    if not bq_query("SELECT value FROM `{SETTINGS_TABLE}` WHERE key = '{key}'"):
+        bq_query(f"INSERT INTO `{SETTINGS_TABLE}` (key, value) VALUES ('{key}', '{value}')")
+    else:
+        bq_query(f"UPDATE `{SETTINGS_TABLE}` SET value = '{value}' WHERE key = '{key}'")
 
 
 def get_existing_games(user: str) -> dict:

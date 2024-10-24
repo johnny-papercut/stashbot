@@ -44,7 +44,7 @@ def get_setting(key: str) -> str:
 
 
 def update_setting(key: str, value: str):
-    if not bq_query("SELECT value FROM `{SETTINGS_TABLE}` WHERE key = '{key}'"):
+    if not bq_query(f"SELECT value FROM `{SETTINGS_TABLE}` WHERE key = '{key}'"):
         bq_query(f"INSERT INTO `{SETTINGS_TABLE}` (key, value) VALUES ('{key}', '{value}')")
     else:
         bq_query(f"UPDATE `{SETTINGS_TABLE}` SET value = '{value}' WHERE key = '{key}'")

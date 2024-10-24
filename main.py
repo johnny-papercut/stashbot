@@ -145,7 +145,7 @@ def add_user(user):
     userlist.append(user)
 
     helpers.update_setting('users', ','.join(userlist))
-    # update_user(user, mute=True)
+    update_user(user, mute=True)
 
     return f"Added {user}"
 
